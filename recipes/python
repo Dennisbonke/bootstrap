@@ -14,7 +14,6 @@ prepare() {
 }
 
 configure() {
-        echo $JINX_ARCH
         ac_cv_file__dev_ptmx=yes \
         ac_cv_file__dev_ptc=yes \
         ac_cv_func_sched_setscheduler=no \

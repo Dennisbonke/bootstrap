@@ -1,0 +1,25 @@
+#! /bin/sh
+
+name=polkit-qt
+version=0.200.0
+revision=1
+tarball_url="https://download.kde.org/stable/polkit-qt-1/polkit-qt-1-${version}.tar.xz"
+tarball_blake2b="4edd1577178d4b61889f3da3699f36e0b3251c38b111c0c219ad9c9585ff32845034c068a5c382c29baa1d9cd8d723378422dafb4ea8734766da1b8032025826"
+hostdeps="gcc pkg-config cmake qt6"
+deps="core-libs qtbase6 polkit"
+
+configure() {
+    cmake_configure \
+		-DQT_MAJOR_VERSION=6 \
+		-Wno-dev
+}
+
+build() {
+    cmake --build . -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" cmake --install .
+
+    post_package_strip
+}
